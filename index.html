@@ -1,135 +1,386 @@
+<!-- File: index.html -->
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Developer Jear – บริการทำบัญชี & ความรู้ไอที</title>
-    <meta name="description" content="โปรไฟล์ บริการทำบัญชี ความรู้ไอที และช่องทางติดต่อของ Somsak Saejear (Developer Jear)">
-    <link rel="canonical" href="https://developerjear.online/" />
-    <meta property="og:title" content="Developer Jear – บริการทำบัญชี & ความรู้ไอที" />
-    <meta property="og:description" content="โปรไฟล์ บริการทำบัญชี ความรู้ไอที และช่องทางติดต่อ" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://developerjear.online/" />
-    <meta name="theme-color" content="#ffffff" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACCOUNTANT AI – บริการบัญชี & ภาษี มืออาชีพ // ให้ความรู้ไอที</title>
+  <meta name="description" content="ACCOUNTANT AI | บริการบัญชี & ภาษี มืออาชีพ พร้อมบทความความรู้บัญชี ภาษี และไอที/AI" />
+  <meta property="og:title" content="ACCOUNTANT AI – บริการบัญชี & ภาษี มืออาชีพ" />
+  <meta property="og:description" content="ให้คำปรึกษา บริการบัญชี ภาษี และบทความความรู้ไอที/AI" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="th_TH" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f1a;          /* พื้นหลังเข้มสงบ */
+      --bg-soft:#0f1729;     /* เน้นส่วนคั่น */
+      --text:#e6e9f0;        /* ข้อความหลักบนพื้นเข้ม */
+      --muted:#aab3c5;       /* ข้อความรอง */
+      --card:#111827cc;      /* การ์ดขุ่น */
+      --primary:#2563eb;     /* น้ำเงินหลัก */
+      --accent:#9333ea;      /* ม่วงไฮไลท์ */
+      --ok:#10b981;          /* เขียวสำเร็จ */
+      --warn:#f59e0b;        /* คำเตือน */
+      --danger:#ef4444;      /* ข้อผิดพลาด */
+      --radius:20px;         /* มุมโค้งใหญ่ */
+      --shadow:0 10px 30px rgba(0,0,0,.3);
+      --max:1100px;          /* ความกว้างคอนเทนต์ */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Noto Sans Thai", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text); background:linear-gradient(120deg, #0c1224 0%, #0b0f1a 50%, #10162a 100%);
+      line-height:1.6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{width:100%; max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    <link rel="icon" href="/assets/img/favicon.png" />
-    <link rel="stylesheet" href="/assets/css/style.css" />
-    <script src="/assets/js/app.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+    /* --- NAV --- */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(12px); background:#0b1020aa; border-bottom:1px solid #1f2942}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.4px}
+    .brand-logo{width:40px; height:40px; border-radius:12px; background:conic-gradient(from 210deg, var(--primary), var(--accent)); box-shadow:0 6px 20px rgba(37,99,235,.45)}
+    .brand-title{font-size:1.1rem}
+    .nav-links{display:flex; gap:18px; font-weight:600}
+    .nav-links a{opacity:.9}
+    .nav-links a:hover{opacity:1; text-decoration:underline}
 
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="#home" aria-label="Developer Jear Home">Developer Jear</a>
-        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="siteNav">เมนู</button>
-        <nav id="siteNav" class="site-nav" aria-label="หลัก">
-          <a href="#profile">โปรไฟล์</a>
-          <a href="#services">บริการ</a>
-          <a href="#knowledge">ความรู้</a>
-          <a href="#contact">ติดต่อ</a>
-        </nav>
+    /* --- HERO --- */
+    .hero{position:relative; overflow:hidden;}
+    .hero::before{content:""; position:absolute; inset:-20% -10% -10% -20%; background:radial-gradient(1000px 600px at 10% 10%, rgba(37,99,235,.18), transparent 60%), radial-gradient(1200px 700px at 90% 20%, rgba(147,51,234,.16), transparent 60%)}
+    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center; padding:72px 0}
+    .hero h1{font-size:clamp(28px, 4vw, 44px); line-height:1.15; margin:0 0 12px}
+    .tagline{font-size:clamp(16px, 2.2vw, 20px); color:var(--muted)}
+    .cta{display:flex; gap:14px; margin-top:22px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:12px; font-weight:700; border:1px solid transparent; transition:.2s}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:linear-gradient(135deg, var(--primary), var(--accent)); box-shadow:0 10px 24px rgba(37,99,235,.35)}
+    .btn-ghost{border-color:#2a3557; background:#111a32}
+
+    /* --- SECTIONS --- */
+    section{padding:56px 0}
+    h2{font-size:clamp(22px, 3vw, 30px); margin:0 0 22px}
+    .lead{color:var(--muted)}
+
+    /* --- CARDS --- */
+    .cards{display:grid; grid-template-columns:repeat(12, 1fr); gap:20px}
+    .card{grid-column:span 12; background:linear-gradient(180deg,#0f162c,#0c1224); border:1px solid #1b2340; border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
+    @media(min-width:720px){.card.md-6{grid-column:span 6}.card.md-4{grid-column:span 4}}
+
+    .chip{display:inline-flex; align-items:center; gap:8px; border:1px solid #223056; padding:6px 10px; border-radius:999px; font-size:.9rem; color:#c7d2fe}
+
+    /* --- KNOWLEDGE --- */
+    .toolbar{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin:10px 0 24px}
+    .search{flex:1; min-width:240px; display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid #27314f; background:#0e152b; border-radius:12px}
+    .search input{all:unset; flex:1}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .article-card{grid-column:span 12; background:#0f162c; border:1px solid #1b2340; border-radius:18px; padding:18px; transition:.2s}
+    .article-card:hover{transform:translateY(-2px)}
+    .article-card h3{margin:0 0 6px; font-size:1.1rem}
+    .meta{font-size:.9rem; color:var(--muted); margin-bottom:8px}
+    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .tags span{font-size:.8rem; border:1px dashed #2a365d; padding:4px 8px; border-radius:999px; color:#c8cdf0}
+    mark{background:linear-gradient(180deg, rgba(254,240,138,.3), rgba(254,240,138,.15)); color:#fff; padding:0 2px; border-radius:4px}
+
+    /* --- CONTACT --- */
+    form{display:grid; gap:12px}
+    .input{display:flex; flex-direction:column; gap:6px}
+    .input input, .input textarea{background:#0e152b; border:1px solid #27314f; color:var(--text); padding:12px 14px; border-radius:12px; resize:vertical}
+    .status{margin-top:8px; font-size:.95rem}
+
+    /* --- FOOTER --- */
+    footer{padding:26px 0; border-top:1px solid #1f2942; background:#0b1020}
+    .footer-grid{display:grid; gap:10px}
+
+    /* --- MEDIA --- */
+    @media(max-width:960px){
+      .hero-grid{grid-template-columns:1fr; padding:44px 0}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="ไปบนสุด">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <div class="brand-title">ACCOUNTANT AI</div>
+      </a>
+      <div class="nav-links">
+        <a href="#services">บริการ</a>
+        <a href="#knowledge">ความรู้</a>
+        <a href="#contact">ติดต่อ</a>
       </div>
-    </header>
+    </div>
+  </nav>
 
-    <main id="main">
-      <section id="home" class="hero">
-        <div class="container">
-          <h1>แนะนำตัว · บริการทำบัญชี · ความรู้ไอที</h1>
-          <p>ยินดีต้อนรับสู่พื้นที่ให้ความรู้และบริการบัญชีสำหรับธุรกิจขนาดเล็ก-กลาง โดย <strong>Somsak Saejear</strong></p>
-          <div class="cta-row">
-            <a href="#services" class="btn">ดูบริการ</a>
-            <a href="#contact" class="btn btn-secondary">ติดต่อ</a>
-          </div>
+  <!-- HERO -->
+  <header id="top" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>บริการบัญชี & ภาษี <span style="color:#c7d2fe">มืออาชีพ</span><br/>พร้อม <span style="background:linear-gradient(120deg,var(--primary),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent">ให้ความรู้ไอที/AI</span></h1>
+        <p class="tagline">ดูแลงานบัญชีและภาษีครบวงจร สำหรับธุรกิจขนาดเล็ก–กลาง พร้อมแบ่งปันบทความที่อ่านง่ายและนำไปใช้ได้จริง</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact">ปรึกษาฟรี</a>
+          <a class="btn btn-ghost" href="#knowledge">อ่านบทความ</a>
         </div>
-      </section>
+        <div style="margin-top:22px" class="chip">LINE ID: @951lljea</div>
+      </div>
+      <!-- ภาพ/พื้นหลัง SVG ความละเอียดสูง ไม่แตก -->
+      <div aria-hidden="true">
+        <svg viewBox="0 0 480 360" width="100%" height="100%" role="img" aria-label="ภาพประกอบ" style="border-radius:18px; box-shadow:var(--shadow); border:1px solid #1b2340; background:radial-gradient(160px 100px at 80% 10%, rgba(147,51,234,.25), transparent), radial-gradient(220px 160px at 20% 90%, rgba(37,99,235,.25), transparent)">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#2563eb"/>
+              <stop offset="1" stop-color="#9333ea"/>
+            </linearGradient>
+          </defs>
+          <g opacity=".9">
+            <path d="M0,280 Q120,240 240,280 T480,280 V360 H0 Z" fill="url(#g1)"/>
+            <circle cx="380" cy="70" r="40" fill="#8b5cf6" opacity=".35"/>
+            <circle cx="120" cy="40" r="26" fill="#60a5fa" opacity=".35"/>
+            <circle cx="280" cy="110" r="18" fill="#22d3ee" opacity=".35"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </header>
 
-      <section id="profile" class="section">
-        <div class="container">
-          <h2>โปรไฟล์</h2>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <h2>บริการ</h2>
+      <p class="lead">ทำบัญชีรายเดือน, ยื่นภาษีบุคคลและนิติบุคคล, ปรึกษาด้านบัญชีและภาษี, วางระบบเอกสารดิจิทัล และ e‑Tax Invoice/Receipt</p>
+      <div class="cards">
+        <div class="card md-4"><strong>ทำบัญชีรายเดือน</strong><br>บันทึกบัญชี/กระทบยอด/งบการเงิน พร้อมแนวทางลดความเสี่ยงภาษี</div>
+        <div class="card md-4"><strong>ยื่นภาษีบุคคล/นิติบุคคล</strong><br>วางแผนภาษี กลางปี–สิ้นปี ภ.ง.ด.51/50, ภ.พ.30, ภ.ง.ด.3/53 ฯลฯ</div>
+        <div class="card md-4"><strong>ที่ปรึกษา & ระบบ</strong><br>ตั้งค่าระบบเอกสารดิจิทัล e‑Withholding/e‑Tax และเวิร์กโฟลว์อนุมัติ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KNOWLEDGE -->
+  <section id="knowledge">
+    <div class="container">
+      <h2>ความรู้</h2>
+      <div class="toolbar">
+        <div class="search" role="search" aria-label="ค้นหาบทความ">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input id="q" placeholder="ค้นหาบทความ (บัญชี/ภาษี/ไอที/AI)" autocomplete="off" />
+        </div>
+        <div class="chip" id="resultCount">บทความทั้งหมด</div>
+      </div>
+
+      <div class="grid" id="articles">
+        <!-- A1: ภงด.51 ปี 2568 -->
+        <article class="article-card" data-category="tax" data-tags="ภงด51 ภาษีนิติบุคคล ครึ่งปี efiling เหตุอันสมควร 2568">
+          <h3>ภ.ง.ด.51 ปี 2568: เกณฑ์ยื่น, เหตุอันสมควร, เดดไลน์ยื่นออนไลน์ (+8 วัน)</h3>
+          <div class="meta">หมวด: ภาษีธุรกิจ • อัปเดต</div>
           <p>
-            สวัสดีครับ ผมชื่อ <strong>สมศักดิ์ แซ่เจีย</strong> ผู้ให้บริการด้านบัญชีและภาษี พร้อมให้คำแนะนำธุรกิจขนาดเล็ก-กลาง และมีความสนใจด้านไอที
+            นิติบุคคลต้องยื่นแบบ <strong>ภ.ง.ด.51</strong> ภายใน <strong>2 เดือน</strong> นับแต่วันสุดท้ายของรอบระยะเวลา <strong>6 เดือนแรก</strong> ของรอบบัญชี
+            การยื่นผ่าน <em>E‑Filing</em> ได้สิทธิขยายเวลายื่นและชำระออกไปอีก <strong>8 วัน</strong> (ตามประกาศกรมสรรพากร) ตัวอย่าง: ถ้ารอบบัญชี 1 ม.ค. 2568 – 31 ธ.ค. 2568 ครึ่งปีจบ 30 มิ.ย. 2568 → ยื่นภายใน 31 ส.ค. 2568 และหากยื่นออนไลน์ ขยายได้อีก 8 วัน
           </p>
-        </div>
-      </section>
+          <ul>
+            <li><strong>เหตุอันสมควร</strong> ใช้อธิบายกรณีประมาณการกำไรสุทธิคลาดเคลื่อน หากประเมินต่ำกว่า <strong>25%</strong> โดยไม่มีเหตุอันสมควร อาจต้องเสียเงินเพิ่ม 20% ของภาษีที่ขาด</li>
+            <li><strong>ข้อควรระวัง</strong>: จัดทำประมาณการจากข้อมูลจริง 6 เดือนแรก, ตรวจรายการปรับปรุงและสิทธิประโยชน์, ตรวจการคำนวณอัตราภาษี SME (ถ้ามีสิทธิ)</li>
+            <li><strong>ชำระภาษี</strong>: ช่องทาง e‑Payment/Internet Banking/บัตรเครดิต ผ่านระบบสรรพากร</li>
+          </ul>
+          <div class="tags"><span>ภงด.51</span><span>+8 วัน E‑Filing</span><span>เหตุอันสมควร</span><span>ตัวอย่างเดดไลน์</span></div>
+        </article>
 
-      <section id="services" class="section section-alt">
-        <div class="container">
-          <h2>บริการทำบัญชี</h2>
-          <div class="grid-3">
-            <article class="card">
-              <h3>ทำบัญชีรายเดือน</h3>
-              <p>จัดทำเอกสาร บันทึกบัญชี ปิดงบรายเดือน พร้อมรายงานสรุปที่อ่านง่าย</p>
-            </article>
-            <article class="card">
-              <h3>ยื่นภาษีบุคคล/นิติบุคคล</h3>
-              <p>ดูแลการคำนวณภาษีและยื่นแบบอย่างถูกต้อง ตรงเวลา</p>
-            </article>
-            <article class="card">
-              <h3>ปรึกษาบัญชีและภาษี</h3>
-              <p>ให้คำปรึกษาเชิงปฏิบัติ เน้นประหยัดเวลาและลดความเสี่ยง</p>
-            </article>
-          </div>
-        </div>
-      </section>
+        <!-- A2: ภ.พ.30 -->
+        <article class="article-card" data-category="tax" data-tags="ภพ30 VAT ภาษีมูลค่าเพิ่ม efiling เดดไลน์">
+          <h3>ภ.พ.30 รายเดือน: ขั้นตอนยื่น, เอกสาร, เดดไลน์ (e‑Filing ได้ +8 วัน)</h3>
+          <div class="meta">หมวด: ภาษีมูลค่าเพิ่ม</div>
+          <p>สรุปขั้นตอนกรอกแบบ, วิธีคำนวณภาษีขาย‑ซื้อ, เอกสารประกอบ และแนวทางป้องกันความผิดพลาดในการยื่นผ่านอินเทอร์เน็ต (โดยทั่วไปการยื่นออนไลน์ได้สิทธิ +8 วันจากกำหนดกระดาษ).</p>
+          <div class="tags"><span>ภ.พ.30</span><span>VAT</span><span>e‑Filing</span></div>
+        </article>
 
-      <section id="knowledge" class="section">
-        <div class="container">
-          <div class="section-head">
-            <h2>ความรู้</h2>
-            <div class="search">
-              <label for="postSearch" class="sr-only">ค้นหาบทความ</label>
-              <input id="postSearch" type="search" placeholder="ค้นหาบทความ..." />
-            </div>
-          </div>
-          <div id="postList" class="grid-3" aria-live="polite"></div>
-          <p id="postEmpty" class="muted" hidden>ไม่พบบทความตามที่ค้นหา</p>
-        </div>
-      </section>
+        <!-- A3: ภ.ง.ด.3/53 eWHT -->
+        <article class="article-card" data-category="tax" data-tags="ภงด3 ภงด53 หัก ณ ที่จ่าย e-Withholding Tax eWHT ใบแนบ">
+          <h3>ภ.ง.ด.3/53: หักภาษี ณ ที่จ่าย + e‑Withholding Tax</h3>
+          <div class="meta">หมวด: ภาษีหัก ณ ที่จ่าย</div>
+          <p>เลือกแบบให้ถูก (บุคคลธรรมดา/นิติบุคคล), อัตราที่ใช้บ่อย, วิธีทำ e‑Withholding Tax และการเตรียมไฟล์ใบแนบ (RD Prep).</p>
+          <div class="tags"><span>WT</span><span>e‑Withholding</span></div>
+        </article>
 
-      <section id="contact" class="section section-alt">
-        <div class="container">
-          <h2>ติดต่อ</h2>
-          <div class="grid-2">
-            <form id="contactForm" class="card" novalidate>
-              <div class="field">
-                <label for="name">ชื่อ</label>
-                <input id="name" name="name" type="text" required />
-                <small class="error" data-for="name"></small>
-              </div>
-              <div class="field">
-                <label for="email">อีเมล</label>
-                <input id="email" name="email" type="email" required />
-                <small class="error" data-for="email"></small>
-              </div>
-              <div class="field">
-                <label for="message">ข้อความ</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-                <small class="error" data-for="message"></small>
-              </div>
-              <div class="actions">
-                <button class="btn" type="submit">ส่งข้อความ</button>
-                <button class="btn btn-secondary" type="reset">ล้าง</button>
-              </div>
-              <p class="muted">*ฟอร์มนี้จะเปิดอีเมลไคลเอนต์ (mailto) เพื่อส่งข้อความ</p>
-            </form>
+        <!-- A4: e‑Tax Invoice/Receipt -->
+        <article class="article-card" data-category="acct" data-tags="e-tax invoice receipt e-Tax การออกใบกำกับภาษีอิเล็กทรอนิกส์">
+          <h3>เริ่มใช้ e‑Tax Invoice & e‑Receipt อย่างถูกต้อง</h3>
+          <div class="meta">หมวด: ระบบเอกสารดิจิทัล</div>
+          <p>เงื่อนไขคุณสมบัติผู้ประกอบการ, ขั้นตอนสมัครใช้บริการกับหน่วยรับข้อมูล, รูปแบบไฟล์, และแนวทางจัดเก็บเอกสารดิจิทัลให้ตรวจสอบได้.</p>
+          <div class="tags"><span>e‑Tax</span><span>Workflow</span></div>
+        </article>
 
-            <div class="card">
-              <h3>ช่องทางอื่น ๆ</h3>
-              <ul>
-                <li><strong>อีเมล:</strong> <a href="mailto:somsak.jear@gmail.com">somsak.jear@gmail.com</a></li>
-                <li><strong>เว็บไซต์:</strong> <a href="https://developerjear.online/">developerjear.online</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+        <!-- A5: ประกันสังคม ม.33 -->
+        <article class="article-card" data-category="acct" data-tags="ประกันสังคม ม33 ส่งเงินสมทบ นายจ้าง ลูกจ้าง สปส">
+          <h3>ประกันสังคม ม.33: สิ่งที่นายจ้างต้องรู้</h3>
+          <div class="meta">หมวด: บริหารงานบุคคล</div>
+          <p>สรุปฐานค่าจ้าง, การคำนวณเงินสมทบ, วิธีนำส่งออนไลน์, และรายการตรวจสอบก่อนตัดรอบ.</p>
+          <div class="tags"><span>สปส</span><span>HR</span></div>
+        </article>
 
-    <footer class="site-footer">
-      <div class="container">
-        <small>© <span id="year"></span> Developer Jear | พัฒนาโดย Somsak Saejear</small>
+        <!-- A6: งบการเงิน & DBD -->
+        <article class="article-card" data-category="acct" data-tags="งบการเงิน DBD นำส่งงบ สบช3 XBRL">
+          <h3>ยื่นงบการเงินกับ DBD ให้ผ่านในครั้งเดียว</h3>
+          <div class="meta">หมวด: งบการเงิน</div>
+          <p>เช็กเอกสารก่อนยื่น, จุดพลาดที่พบบ่อย, การแปลงไฟล์ XBRL พร้อมตัวอย่างรายการตรวจสอบ.</p>
+          <div class="tags"><span>DBD</span><span>XBRL</span></div>
+        </article>
+
+        <!-- IT1: AI สำหรับบัญชี -->
+        <article class="article-card" data-category="it" data-tags="AI บัญชี OCR RPA automation เอกสาร ใบกำกับ">
+          <h3>AI สำหรับบัญชี: อ่านใบแจ้งหนี้/ใบกำกับ ด้วย OCR + Workflow</h3>
+          <div class="meta">หมวด: ความรู้ไอที/AI</div>
+          <p>วางโฟลว์รับเอกสาร → OCR → ตรวจสอบ → ลงบัญชี → แนบหลักฐาน ลดงานมือซ้ำซ้อนและความผิดพลาด.</p>
+          <div class="tags"><span>OCR</span><span>Automation</span></div>
+        </article>
+
+        <!-- IT2: Prompt สำหรับงานบัญชี -->
+        <article class="article-card" data-category="it" data-tags="Prompt Engineering AI บัญชี ภาษี แนวปฏิบัติ">
+          <h3>Prompt ให้ได้ใจความ: สูตรเขียนคำสั่ง AI ที่นักบัญชีใช้ได้จริง</h3>
+          <div class="meta">หมวด: ความรู้ไอที/AI</div>
+          <p>แม่แบบ Prompt สำหรับสรุปรายงาน, ตรวจเช็กรายการผิดปกติ, และสร้างเช็กลิสต์งานประจำเดือน.</p>
+          <div class="tags"><span>Prompt</span><span>Template</span></div>
+        </article>
+
+        <!-- IT3: Dashboard + AI -->
+        <article class="article-card" data-category="it" data-tags="Dashboard Google Sheets Data Studio Looker Studio AI สรุปข้อมูล">
+          <h3>ทำ Dashboard ง่าย ๆ ด้วย Sheets + AI</h3>
+          <div class="meta">หมวด: ความรู้ไอที/AI</div>
+          <p>เชื่อมข้อมูลรายรับ‑รายจ่าย, ทำพรีเซ็ตกราฟ, และใช้งาน AI ช่วยสรุปอินไซต์อย่างเข้าใจง่าย.</p>
+          <div class="tags"><span>Dashboard</span><span>Sheets</span></div>
+        </article>
+
+        <!-- IT4: ความปลอดภัยข้อมูล -->
+        <article class="article-card" data-category="it" data-tags="Security ความปลอดภัย ข้อมูล ลูกค้า PDPA การเปิดเผยน้อยที่สุด">
+          <h3>PDPA & ความปลอดภัยข้อมูล เมื่อใช้ AI ในงานบัญชี</h3>
+          <div class="meta">หมวด: ความรู้ไอที/AI</div>
+          <p>หลักการเก็บ/ใช้ข้อมูลอย่างจำเป็นเท่านั้น, การลบข้อมูลอ่อนไหว, และการเลือกเครื่องมือที่เชื่อถือได้.</p>
+          <div class="tags"><span>PDPA</span><span>Privacy</span></div>
+        </article>
+
+        <!-- IT5: เวิร์กโฟลว์อัตโนมัติ -->
+        <article class="article-card" data-category="it" data-tags="Automation Workflow Make Zapier API เชื่อมระบบ">
+          <h3>เชื่อมระบบอัตโนมัติ (Make/Zapier): น้อยคลิกมากผลลัพธ์</h3>
+          <div class="meta">หมวด: ความรู้ไอที/AI</div>
+          <p>แนวทางออกแบบเวิร์กโฟลว์ ส่งอีเมล/ดึงไฟล์/อัปเดตชีต อัตโนมัติ เพื่อลดงานซ้ำ ๆ.</p>
+          <div class="tags"><span>Automation</span><span>Integration</span></div>
+        </article>
       </div>
-    </footer>
-  </body>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2>ติดต่อ</h2>
+      <div class="cards">
+        <div class="card md-6">
+          <form id="contactForm" novalidate>
+            <div class="input"><label for="name">ชื่อ</label><input id="name" name="name" required placeholder="เช่น สมศักดิ์"/></div>
+            <div class="input"><label for="email">อีเมล</label><input id="email" name="email" type="email" required placeholder="your@email.com"/></div>
+            <div class="input"><label for="phone">โทรศัพท์ (ไม่บังคับ)</label><input id="phone" name="phone" placeholder="08x-xxx-xxxx"/></div>
+            <div class="input"><label for="message">ข้อความ</label><textarea id="message" name="message" rows="4" required placeholder="พิมพ์ข้อความถึงเรา..."></textarea></div>
+            <button class="btn btn-primary" type="submit">ส่งข้อความ</button>
+            <div id="status" class="status" role="status" aria-live="polite"></div>
+          </form>
+          <small style="display:block; margin-top:10px; color:var(--muted)">หมายเหตุ: ฟอร์มนี้ต้องตั้งค่า <code>FORM_ENDPOINT</code> ก่อน (ดูคำอธิบายในเอกสารประกอบ).</small>
+        </div>
+        <div class="card md-6">
+          <strong>ช่องทางด่วน</strong>
+          <ul>
+            <li>LINE ID: <a href="https://line.me/R/ti/p/@951lljea" target="_blank" rel="noopener">@951lljea</a></li>
+            <li>Email: <a href="mailto:somsak.jear@gmail.com">somsak.jear@gmail.com</a></li>
+          </ul>
+          <picture>
+            <!-- ตัวอย่างภาพพื้นหลัง/แบนเนอร์ -->
+            <source srcset="assets/hero@2x.webp" type="image/webp">
+            <img src="assets/hero@2x.jpg" alt="แบนเนอร์บริการบัญชีและภาษี" style="width:100%; border-radius:14px; border:1px solid #1b2340" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div>© <span id="year"></span> Developer Jear • <span class="chip">LINE ID: @951lljea</span></div>
+      <div style="color:var(--muted)">พัฒนาโดย Somsak Saejear • "ACCOUNTANT AI" – บริการบัญชี & ภาษี มืออาชีพ // และให้ความรู้ไอที</div>
+    </div>
+  </footer>
+
+  <script>
+    // ====== CONFIG ======
+    const FORM_ENDPOINT = ""; // ใส่ URL Web App ของ Google Apps Script ที่ Deploy แล้ว (แบบ Anyone)
+    const STATUS = document.getElementById('status');
+
+    // ====== SEARCH ======
+    const q = document.getElementById('q');
+    const articles = Array.from(document.querySelectorAll('.article-card'));
+    const counter = document.getElementById('resultCount');
+
+    function normalize(s){ return (s||"").toString().toLowerCase().normalize('NFKD'); }
+
+    function highlight(text, term){
+      if(!term) return text;
+      const esc = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return text.replace(new RegExp(`(${esc})`, 'ig'), '<mark>$1</mark>');
+    }
+
+    function filter(){
+      const term = normalize(q.value.trim());
+      let shown = 0;
+      articles.forEach(a=>{
+        const hay = normalize(a.innerText + ' ' + (a.dataset.tags||'') + ' ' + (a.dataset.category||''));
+        const match = term==='' || hay.includes(term);
+        a.style.display = match ? '' : 'none';
+        if(match){ shown++; if(term){
+          const h3 = a.querySelector('h3');
+          h3.innerHTML = highlight(h3.textContent, term);
+        }}
+      });
+      counter.textContent = term? `ผลลัพธ์ ${shown} บทความ` : `บทความทั้งหมด`;
+    }
+    q.addEventListener('input', filter);
+
+    // ====== CONTACT FORM ======
+    const form = document.getElementById('contactForm');
+    form?.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      STATUS.textContent = '';
+      if(!FORM_ENDPOINT){
+        STATUS.innerHTML = '⚠️ กรุณาตั้งค่า FORM_ENDPOINT ก่อนใช้งานจริง';
+        STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--warn');
+        return;
+      }
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        message: form.message.value.trim(),
+        time: new Date().toISOString()
+      };
+      try{
+        const res = await fetch(FORM_ENDPOINT, { method:'POST', mode:'cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+        if(!res.ok) throw new Error('bad status '+res.status);
+        form.reset();
+        STATUS.textContent = '✅ ส่งข้อความเรียบร้อย ขอบคุณครับ';
+        STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--ok');
+      }catch(err){
+        STATUS.textContent = '❌ ส่งไม่สำเร็จ โปรดลองอีกครั้งหรือติดต่อทาง LINE';
+        STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger');
+      }
+    });
+
+    // ====== MISC ======
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
