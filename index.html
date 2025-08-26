@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Developer Jear – บริการทำบัญชี & ความรู้ไอที</title>
+    <meta name="description" content="โปรไฟล์ บริการทำบัญชี ความรู้ไอที และช่องทางติดต่อของ Somsak Saejear (Developer Jear)">
+    <link rel="canonical" href="https://developerjear.online/" />
+    <meta property="og:title" content="Developer Jear – บริการทำบัญชี & ความรู้ไอที" />
+    <meta property="og:description" content="โปรไฟล์ บริการทำบัญชี ความรู้ไอที และช่องทางติดต่อ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://developerjear.online/" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script src="/assets/js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#home" aria-label="Developer Jear Home">Developer Jear</a>
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="siteNav">เมนู</button>
+        <nav id="siteNav" class="site-nav" aria-label="หลัก">
+          <a href="#profile">โปรไฟล์</a>
+          <a href="#services">บริการ</a>
+          <a href="#knowledge">ความรู้</a>
+          <a href="#contact">ติดต่อ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="home" class="hero">
+        <div class="container">
+          <h1>แนะนำตัว · บริการทำบัญชี · ความรู้ไอที</h1>
+          <p>ยินดีต้อนรับสู่พื้นที่ให้ความรู้และบริการบัญชีสำหรับธุรกิจขนาดเล็ก-กลาง โดย <strong>Somsak Saejear</strong></p>
+          <div class="cta-row">
+            <a href="#services" class="btn">ดูบริการ</a>
+            <a href="#contact" class="btn btn-secondary">ติดต่อ</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile" class="section">
+        <div class="container">
+          <h2>โปรไฟล์</h2>
+          <p>
+            สวัสดีครับ ผมชื่อ <strong>สมศักดิ์ แซ่เจีย</strong> ผู้ให้บริการด้านบัญชีและภาษี พร้อมให้คำแนะนำธุรกิจขนาดเล็ก-กลาง และมีความสนใจด้านไอที
+          </p>
+        </div>
+      </section>
+
+      <section id="services" class="section section-alt">
+        <div class="container">
+          <h2>บริการทำบัญชี</h2>
+          <div class="grid-3">
+            <article class="card">
+              <h3>ทำบัญชีรายเดือน</h3>
+              <p>จัดทำเอกสาร บันทึกบัญชี ปิดงบรายเดือน พร้อมรายงานสรุปที่อ่านง่าย</p>
+            </article>
+            <article class="card">
+              <h3>ยื่นภาษีบุคคล/นิติบุคคล</h3>
+              <p>ดูแลการคำนวณภาษีและยื่นแบบอย่างถูกต้อง ตรงเวลา</p>
+            </article>
+            <article class="card">
+              <h3>ปรึกษาบัญชีและภาษี</h3>
+              <p>ให้คำปรึกษาเชิงปฏิบัติ เน้นประหยัดเวลาและลดความเสี่ยง</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="knowledge" class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2>ความรู้</h2>
+            <div class="search">
+              <label for="postSearch" class="sr-only">ค้นหาบทความ</label>
+              <input id="postSearch" type="search" placeholder="ค้นหาบทความ..." />
+            </div>
+          </div>
+          <div id="postList" class="grid-3" aria-live="polite"></div>
+          <p id="postEmpty" class="muted" hidden>ไม่พบบทความตามที่ค้นหา</p>
+        </div>
+      </section>
+
+      <section id="contact" class="section section-alt">
+        <div class="container">
+          <h2>ติดต่อ</h2>
+          <div class="grid-2">
+            <form id="contactForm" class="card" novalidate>
+              <div class="field">
+                <label for="name">ชื่อ</label>
+                <input id="name" name="name" type="text" required />
+                <small class="error" data-for="name"></small>
+              </div>
+              <div class="field">
+                <label for="email">อีเมล</label>
+                <input id="email" name="email" type="email" required />
+                <small class="error" data-for="email"></small>
+              </div>
+              <div class="field">
+                <label for="message">ข้อความ</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <small class="error" data-for="message"></small>
+              </div>
+              <div class="actions">
+                <button class="btn" type="submit">ส่งข้อความ</button>
+                <button class="btn btn-secondary" type="reset">ล้าง</button>
+              </div>
+              <p class="muted">*ฟอร์มนี้จะเปิดอีเมลไคลเอนต์ (mailto) เพื่อส่งข้อความ</p>
+            </form>
+
+            <div class="card">
+              <h3>ช่องทางอื่น ๆ</h3>
+              <ul>
+                <li><strong>อีเมล:</strong> <a href="mailto:somsak.jear@gmail.com">somsak.jear@gmail.com</a></li>
+                <li><strong>เว็บไซต์:</strong> <a href="https://developerjear.online/">developerjear.online</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <small>© <span id="year"></span> Developer Jear | พัฒนาโดย Somsak Saejear</small>
+      </div>
+    </footer>
+  </body>
+</html>
