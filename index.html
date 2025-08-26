@@ -1,4 +1,4 @@
-<!-- File: index.html -->
+<!-- File: index.html (v4 – light theme + PDF + tooltip) -->
 <!doctype html>
 <html lang="th">
 <head>
@@ -15,92 +15,104 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0f1a;          /* พื้นหลังเข้มสงบ */
-      --bg-soft:#0f1729;     /* เน้นส่วนคั่น */
-      --text:#e6e9f0;        /* ข้อความหลักบนพื้นเข้ม */
-      --muted:#aab3c5;       /* ข้อความรอง */
-      --card:#111827cc;      /* การ์ดขุ่น */
-      --primary:#2563eb;     /* น้ำเงินหลัก */
-      --accent:#9333ea;      /* ม่วงไฮไลท์ */
-      --ok:#10b981;          /* เขียวสำเร็จ */
-      --warn:#f59e0b;        /* คำเตือน */
-      --danger:#ef4444;      /* ข้อผิดพลาด */
-      --radius:20px;         /* มุมโค้งใหญ่ */
-      --shadow:0 10px 30px rgba(0,0,0,.3);
-      --max:1100px;          /* ความกว้างคอนเทนต์ */
+      /* โทนสว่าง เย็นตา */
+      --bg:#eef3fb;            
+      --bg-soft:#f6f9ff;      
+      --text:#101827;         
+      --muted:#556581;        
+      --card:#ffffff;         
+      --primary:#3b82f6;      
+      --accent:#8b5cf6;       
+      --ok:#16a34a;           
+      --warn:#ea580c;         
+      --danger:#ef4444;       
+      --radius:22px;          
+      --shadow:0 10px 28px rgba(16,23,40,.10);
+      --max:1100px;           
+      --line:#dbe5ff;         
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font-family:"Noto Sans Thai", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color:var(--text); background:linear-gradient(120deg, #0c1224 0%, #0b0f1a 50%, #10162a 100%);
+      color:var(--text); background:linear-gradient(180deg,var(--bg-soft), var(--bg));
       line-height:1.6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
     a{color:inherit; text-decoration:none}
     .container{width:100%; max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    /* --- NAV --- */
-    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(12px); background:#0b1020aa; border-bottom:1px solid #1f2942}
+    /* NAV (สว่าง + เบลอ) */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(130%) blur(12px); background:rgba(255,255,255,.75); border-bottom:1px solid var(--line)}
     .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.4px}
-    .brand-logo{width:40px; height:40px; border-radius:12px; background:conic-gradient(from 210deg, var(--primary), var(--accent)); box-shadow:0 6px 20px rgba(37,99,235,.45)}
-    .brand-title{font-size:1.1rem}
-    .nav-links{display:flex; gap:18px; font-weight:600}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px}
+    .brand svg{width:40px; height:40px}
+    .nav-links{display:flex; gap:18px; font-weight:700}
     .nav-links a{opacity:.9}
     .nav-links a:hover{opacity:1; text-decoration:underline}
 
-    /* --- HERO --- */
+    /* HERO (โทนสว่าง) */
     .hero{position:relative; overflow:hidden;}
-    .hero::before{content:""; position:absolute; inset:-20% -10% -10% -20%; background:radial-gradient(1000px 600px at 10% 10%, rgba(37,99,235,.18), transparent 60%), radial-gradient(1200px 700px at 90% 20%, rgba(147,51,234,.16), transparent 60%)}
-    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center; padding:72px 0}
-    .hero h1{font-size:clamp(28px, 4vw, 44px); line-height:1.15; margin:0 0 12px}
+    .hero::before{content:""; position:absolute; inset:-20% -10% -10% -20%; background:
+      radial-gradient(900px 520px at 15% 5%, rgba(59,130,246,.18), transparent 60%),
+      radial-gradient(1100px 600px at 85% 20%, rgba(139,92,246,.16), transparent 60%)}
+    .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center; padding:72px 0}
+    .hero h1{font-size:clamp(28px, 4vw, 46px); line-height:1.12; margin:0 0 12px}
     .tagline{font-size:clamp(16px, 2.2vw, 20px); color:var(--muted)}
-    .cta{display:flex; gap:14px; margin-top:22px}
-    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:12px; font-weight:700; border:1px solid transparent; transition:.2s}
+    .cta{display:flex; flex-wrap:wrap; gap:14px; align-items:center;}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:14px 20px; border-radius:14px; font-weight:800; border:1px solid transparent; transition:.2s}
     .btn:hover{transform:translateY(-1px)}
-    .btn-primary{background:linear-gradient(135deg, var(--primary), var(--accent)); box-shadow:0 10px 24px rgba(37,99,235,.35)}
-    .btn-ghost{border-color:#2a3557; background:#111a32}
+    .btn-primary{background:linear-gradient(135deg, var(--primary), var(--accent)); color:#fff; box-shadow:0 12px 24px rgba(59,130,246,.24)}
+    .btn-ghost{border-color:#cfe0ff; background:#fff}
 
-    /* --- SECTIONS --- */
+    /* SECTIONS */
     section{padding:56px 0}
     h2{font-size:clamp(22px, 3vw, 30px); margin:0 0 22px}
     .lead{color:var(--muted)}
 
-    /* --- CARDS --- */
+    /* CARDS (สว่าง) */
     .cards{display:grid; grid-template-columns:repeat(12, 1fr); gap:20px}
-    .card{grid-column:span 12; background:linear-gradient(180deg,#0f162c,#0c1224); border:1px solid #1b2340; border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
+    .card{grid-column:span 12; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
     @media(min-width:720px){.card.md-6{grid-column:span 6}.card.md-4{grid-column:span 4}}
 
-    .chip{display:inline-flex; align-items:center; gap:8px; border:1px solid #223056; padding:6px 10px; border-radius:999px; font-size:.9rem; color:#c7d2fe}
+    .chip{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); padding:6px 12px; border-radius:999px; font-size:.92rem; color:#0f1a2e; background:#ffffff}
+    .verify{background:#e9fff5; border-color:#b7f3cf; color:#065f46}
+    .verify svg{width:16px; height:16px}
 
-    /* --- KNOWLEDGE --- */
+    /* Tooltip (ไม่พึ่งไลบรารี) */
+    .tooltip{position:relative}
+    .tip{position:absolute; left:0; bottom:calc(100% + 8px); background:#0b1e2f; color:#e7fff7; border:1px solid #2b7a3f; padding:6px 10px; border-radius:8px; white-space:nowrap; box-shadow:var(--shadow); opacity:0; transform:translateY(6px); pointer-events:none; transition:.18s; z-index:1000}
+    .tooltip:hover .tip, .tooltip:focus-within .tip{opacity:1; transform:translateY(0)}
+
+    /* KNOWLEDGE */
     .toolbar{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin:10px 0 24px}
-    .search{flex:1; min-width:240px; display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid #27314f; background:#0e152b; border-radius:12px}
+    .search{flex:1; min-width:240px; display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid var(--line); background:#f3f7ff; border-radius:12px}
     .search input{all:unset; flex:1}
     .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
-    .article-card{grid-column:span 12; background:#0f162c; border:1px solid #1b2340; border-radius:18px; padding:18px; transition:.2s}
+    .article-card{grid-column:span 12; background:#ffffff; border:1px solid var(--line); border-radius:18px; padding:18px; transition:.2s}
     .article-card:hover{transform:translateY(-2px)}
-    .article-card h3{margin:0 0 6px; font-size:1.1rem}
+    .article-card h3{margin:0 0 6px; font-size:1.15rem}
     .meta{font-size:.9rem; color:var(--muted); margin-bottom:8px}
     .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .tags span{font-size:.8rem; border:1px dashed #2a365d; padding:4px 8px; border-radius:999px; color:#c8cdf0}
-    mark{background:linear-gradient(180deg, rgba(254,240,138,.3), rgba(254,240,138,.15)); color:#fff; padding:0 2px; border-radius:4px}
+    .tags span{font-size:.82rem; border:1px solid var(--line); padding:5px 10px; border-radius:999px; color:#334155; background:#f6faff}
+    mark{background:linear-gradient(180deg, rgba(254,240,138,.7), rgba(254,240,138,.35)); color:#111827; padding:0 2px; border-radius:4px}
 
-    /* --- CONTACT --- */
+    /* CONTACT */
     form{display:grid; gap:12px}
     .input{display:flex; flex-direction:column; gap:6px}
-    .input input, .input textarea{background:#0e152b; border:1px solid #27314f; color:var(--text); padding:12px 14px; border-radius:12px; resize:vertical}
+    .input input, .input textarea{background:#f3f7ff; border:1px solid var(--line); color:var(--text); padding:12px 14px; border-radius:12px; resize:vertical}
     .status{margin-top:8px; font-size:.95rem}
 
-    /* --- FOOTER --- */
-    footer{padding:26px 0; border-top:1px solid #1f2942; background:#0b1020}
+    /* FOOTER (สว่าง) */
+    footer{padding:26px 0; border-top:1px solid var(--line); background:linear-gradient(180deg,#fafcff,#eef3fb)}
     .footer-grid{display:grid; gap:10px}
 
-    /* --- MEDIA --- */
-    @media(max-width:960px){
-      .hero-grid{grid-template-columns:1fr; padding:44px 0}
-      .nav-links{display:none}
-    }
+    /* MEDIA */
+    @media(max-width:960px){.hero-grid{grid-template-columns:1fr; padding:48px 0} .nav-links{display:none}}
+
+    /* Utility */
+    .clickable{cursor:pointer}
+    .clickable-block{display:block}
+    .svg-fluid{width:100%; height:auto; display:block} /* ป้องกันภาพล้น/ช่องว่าง */
   </style>
 </head>
 <body>
@@ -108,8 +120,14 @@
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top" aria-label="ไปบนสุด">
-        <div class="brand-logo" aria-hidden="true"></div>
-        <div class="brand-title">ACCOUNTANT AI</div>
+        <!-- โลโก้สว่าง -->
+        <svg viewBox="0 0 64 64" role="img" aria-label="ACCOUNTANT AI logo">
+          <defs><linearGradient id="lg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+        <rect x="6" y="6" width="52" height="52" rx="16" fill="url(#lg)"/>
+        <path d="M20 40c10-1 14-15 28-16v10c-12 0-16 13-28 14z" fill="#ffffff55"/>
+        <circle cx="44" cy="20" r="6" fill="#ffffff66"/>
+        </svg>
+        <div>ACCOUNTANT AI</div>
       </a>
       <div class="nav-links">
         <a href="#services">บริการ</a>
@@ -123,31 +141,40 @@
   <header id="top" class="hero">
     <div class="container hero-grid">
       <div>
-        <h1>บริการบัญชี & ภาษี <span style="color:#c7d2fe">มืออาชีพ</span><br/>พร้อม <span style="background:linear-gradient(120deg,var(--primary),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent">ให้ความรู้ไอที/AI</span></h1>
+        <h1>บริการบัญชี & ภาษี <span style="color:#374151">มืออาชีพ</span><br/>พร้อม <span style="background:linear-gradient(120deg,var(--primary),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent">ให้ความรู้ไอที/AI</span></h1>
         <p class="tagline">ดูแลงานบัญชีและภาษีครบวงจร สำหรับธุรกิจขนาดเล็ก–กลาง พร้อมแบ่งปันบทความที่อ่านง่ายและนำไปใช้ได้จริง</p>
-        <div class="cta">
+        <div class="cta" style="margin-top:20px">
           <a class="btn btn-primary" href="#contact">ปรึกษาฟรี</a>
           <a class="btn btn-ghost" href="#knowledge">อ่านบทความ</a>
         </div>
-        <div style="margin-top:22px" class="chip">LINE ID: @951lljea</div>
+        <div class="cta" style="margin-top:12px">
+          <div class="chip">LINE ID: @951lljea</div>
+          <a class="chip verify tooltip" href="https://page.line.me/951lljea" target="_blank" rel="noopener" aria-describedby="tipLine">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
+            LINE Official
+            <span id="tipLine" role="tooltip" class="tip">โปรไฟล์ LINE Official: @951lljea – คลิกตรวจสอบ</span>
+          </a>
+        </div>
       </div>
-      <!-- ภาพ/พื้นหลัง SVG ความละเอียดสูง ไม่แตก -->
-      <div aria-hidden="true">
-        <svg viewBox="0 0 480 360" width="100%" height="100%" role="img" aria-label="ภาพประกอบ" style="border-radius:18px; box-shadow:var(--shadow); border:1px solid #1b2340; background:radial-gradient(160px 100px at 80% 10%, rgba(147,51,234,.25), transparent), radial-gradient(220px 160px at 20% 90%, rgba(37,99,235,.25), transparent)">
+
+      <!-- ภาพ Hero สว่าง -->
+      <a class="clickable clickable-block" href="https://line.me/R/ti/p/@951lljea" target="_blank" rel="noopener" aria-label="แชท LINE @951lljea">
+        <svg viewBox="0 0 520 380" class="svg-fluid" role="img" aria-label="ภาพประกอบงานบัญชีโทนสว่าง" style="border-radius:20px; box-shadow:var(--shadow); border:1px solid var(--line); background:linear-gradient(180deg,#f7faff,#eef3ff)">
           <defs>
-            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#2563eb"/>
-              <stop offset="1" stop-color="#9333ea"/>
-            </linearGradient>
+            <linearGradient id="h1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
+            <linearGradient id="glow" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3b82f622"/><stop offset="1" stop-color="#8b5cf622"/></linearGradient>
           </defs>
-          <g opacity=".9">
-            <path d="M0,280 Q120,240 240,280 T480,280 V360 H0 Z" fill="url(#g1)"/>
-            <circle cx="380" cy="70" r="40" fill="#8b5cf6" opacity=".35"/>
-            <circle cx="120" cy="40" r="26" fill="#60a5fa" opacity=".35"/>
-            <circle cx="280" cy="110" r="18" fill="#22d3ee" opacity=".35"/>
+          <rect x="0" y="0" width="520" height="380" fill="url(#glow)"/>
+          <g opacity=".6"><circle cx="420" cy="80" r="26" fill="#8b5cf6"/><circle cx="470" cy="140" r="10" fill="#3b82f6"/><circle cx="80" cy="70" r="14" fill="#60a5fa"/></g>
+          <g transform="translate(60,90)">
+            <rect x="0" y="0" rx="18" width="400" height="230" fill="#ffffff" stroke="#dbe5ff"/>
+            <g stroke="#e5edff" stroke-width="1"><path d="M20 50 H380"/><path d="M20 100 H380"/><path d="M20 150 H380"/><path d="M20 200 H380"/><path d="M80 20 V210"/><path d="M160 20 V210"/><path d="M240 20 V210"/><path d="M320 20 V210"/></g>
+            <path d="M20 160 C 80 140, 120 120, 160 135 S 240 165, 320 120 380 130 380 130" fill="none" stroke="url(#h1)" stroke-width="4"/>
+            <g fill="#3b82f644"><rect x="65" y="110" width="24" height="80" rx="6"/><rect x="145" y="90" width="24" height="100" rx="6"/><rect x="225" y="130" width="24" height="60" rx="6"/><rect x="305" y="70" width="24" height="120" rx="6"/></g>
           </g>
+          <path d="M0,300 Q140,260 260,300 T520,300 V380 H0 Z" fill="url(#h1)"/>
         </svg>
-      </div>
+      </a>
     </div>
   </header>
 
@@ -177,95 +204,74 @@
       </div>
 
       <div class="grid" id="articles">
-        <!-- A1: ภงด.51 ปี 2568 -->
+        <!-- A1: ภงด.51 -->
         <article class="article-card" data-category="tax" data-tags="ภงด51 ภาษีนิติบุคคล ครึ่งปี efiling เหตุอันสมควร 2568">
           <h3>ภ.ง.ด.51 ปี 2568: เกณฑ์ยื่น, เหตุอันสมควร, เดดไลน์ยื่นออนไลน์ (+8 วัน)</h3>
           <div class="meta">หมวด: ภาษีธุรกิจ • อัปเดต</div>
-          <p>
-            นิติบุคคลต้องยื่นแบบ <strong>ภ.ง.ด.51</strong> ภายใน <strong>2 เดือน</strong> นับแต่วันสุดท้ายของรอบระยะเวลา <strong>6 เดือนแรก</strong> ของรอบบัญชี
-            การยื่นผ่าน <em>E‑Filing</em> ได้สิทธิขยายเวลายื่นและชำระออกไปอีก <strong>8 วัน</strong> (ตามประกาศกรมสรรพากร) ตัวอย่าง: ถ้ารอบบัญชี 1 ม.ค. 2568 – 31 ธ.ค. 2568 ครึ่งปีจบ 30 มิ.ย. 2568 → ยื่นภายใน 31 ส.ค. 2568 และหากยื่นออนไลน์ ขยายได้อีก 8 วัน
-          </p>
-          <ul>
-            <li><strong>เหตุอันสมควร</strong> ใช้อธิบายกรณีประมาณการกำไรสุทธิคลาดเคลื่อน หากประเมินต่ำกว่า <strong>25%</strong> โดยไม่มีเหตุอันสมควร อาจต้องเสียเงินเพิ่ม 20% ของภาษีที่ขาด</li>
-            <li><strong>ข้อควรระวัง</strong>: จัดทำประมาณการจากข้อมูลจริง 6 เดือนแรก, ตรวจรายการปรับปรุงและสิทธิประโยชน์, ตรวจการคำนวณอัตราภาษี SME (ถ้ามีสิทธิ)</li>
-            <li><strong>ชำระภาษี</strong>: ช่องทาง e‑Payment/Internet Banking/บัตรเครดิต ผ่านระบบสรรพากร</li>
-          </ul>
+          <p>นิติบุคคลต้องยื่นแบบ <strong>ภ.ง.ด.51</strong> ภายใน <strong>2 เดือน</strong> นับแต่วันสุดท้ายของรอบระยะเวลา <strong>6 เดือนแรก</strong> ของรอบบัญชี การยื่นผ่าน <em>E‑Filing</em> ได้สิทธิขยายเวลายื่นและชำระออกไปอีก <strong>8 วัน</strong> ตัวอย่าง: ถ้ารอบบัญชี 1 ม.ค. 2568 – 31 ธ.ค. 2568 ครึ่งปีจบ 30 มิ.ย. 2568 → ยื่นภายใน 31 ส.ค. 2568 และหากยื่นออนไลน์ ขยายได้อีก 8 วัน</p>
+          <div id="poster51" style="margin-top:10px"></div>
+          <div class="cta" style="margin-top:10px; gap:10px">
+            <button id="dlPoster" class="btn btn-ghost">ดาวน์โหลดโปสเตอร์ (PNG)</button>
+            <button id="pdfPoster" class="btn btn-ghost">พิมพ์/บันทึกเป็น PDF</button>
+          </div>
           <div class="tags"><span>ภงด.51</span><span>+8 วัน E‑Filing</span><span>เหตุอันสมควร</span><span>ตัวอย่างเดดไลน์</span></div>
         </article>
 
-        <!-- A2: ภ.พ.30 -->
+        <!-- A2-A6 และ IT1-5 (คงเดิม) -->
         <article class="article-card" data-category="tax" data-tags="ภพ30 VAT ภาษีมูลค่าเพิ่ม efiling เดดไลน์">
           <h3>ภ.พ.30 รายเดือน: ขั้นตอนยื่น, เอกสาร, เดดไลน์ (e‑Filing ได้ +8 วัน)</h3>
           <div class="meta">หมวด: ภาษีมูลค่าเพิ่ม</div>
-          <p>สรุปขั้นตอนกรอกแบบ, วิธีคำนวณภาษีขาย‑ซื้อ, เอกสารประกอบ และแนวทางป้องกันความผิดพลาดในการยื่นผ่านอินเทอร์เน็ต (โดยทั่วไปการยื่นออนไลน์ได้สิทธิ +8 วันจากกำหนดกระดาษ).</p>
+          <p>สรุปขั้นตอนกรอกแบบ, วิธีคำนวณภาษีขาย‑ซื้อ, เอกสารประกอบ และแนวทางป้องกันความผิดพลาดในการยื่นผ่านอินเทอร์เน็ต.</p>
           <div class="tags"><span>ภ.พ.30</span><span>VAT</span><span>e‑Filing</span></div>
         </article>
-
-        <!-- A3: ภ.ง.ด.3/53 eWHT -->
         <article class="article-card" data-category="tax" data-tags="ภงด3 ภงด53 หัก ณ ที่จ่าย e-Withholding Tax eWHT ใบแนบ">
           <h3>ภ.ง.ด.3/53: หักภาษี ณ ที่จ่าย + e‑Withholding Tax</h3>
           <div class="meta">หมวด: ภาษีหัก ณ ที่จ่าย</div>
-          <p>เลือกแบบให้ถูก (บุคคลธรรมดา/นิติบุคคล), อัตราที่ใช้บ่อย, วิธีทำ e‑Withholding Tax และการเตรียมไฟล์ใบแนบ (RD Prep).</p>
+          <p>เลือกแบบให้ถูก (บุคคลธรรมดา/นิติบุคคล), อัตราที่ใช้บ่อย, วิธีทำ e‑Withholding Tax และการเตรียมไฟล์ใบแนบ.</p>
           <div class="tags"><span>WT</span><span>e‑Withholding</span></div>
         </article>
-
-        <!-- A4: e‑Tax Invoice/Receipt -->
         <article class="article-card" data-category="acct" data-tags="e-tax invoice receipt e-Tax การออกใบกำกับภาษีอิเล็กทรอนิกส์">
           <h3>เริ่มใช้ e‑Tax Invoice & e‑Receipt อย่างถูกต้อง</h3>
           <div class="meta">หมวด: ระบบเอกสารดิจิทัล</div>
           <p>เงื่อนไขคุณสมบัติผู้ประกอบการ, ขั้นตอนสมัครใช้บริการกับหน่วยรับข้อมูล, รูปแบบไฟล์, และแนวทางจัดเก็บเอกสารดิจิทัลให้ตรวจสอบได้.</p>
           <div class="tags"><span>e‑Tax</span><span>Workflow</span></div>
         </article>
-
-        <!-- A5: ประกันสังคม ม.33 -->
         <article class="article-card" data-category="acct" data-tags="ประกันสังคม ม33 ส่งเงินสมทบ นายจ้าง ลูกจ้าง สปส">
           <h3>ประกันสังคม ม.33: สิ่งที่นายจ้างต้องรู้</h3>
           <div class="meta">หมวด: บริหารงานบุคคล</div>
           <p>สรุปฐานค่าจ้าง, การคำนวณเงินสมทบ, วิธีนำส่งออนไลน์, และรายการตรวจสอบก่อนตัดรอบ.</p>
           <div class="tags"><span>สปส</span><span>HR</span></div>
         </article>
-
-        <!-- A6: งบการเงิน & DBD -->
         <article class="article-card" data-category="acct" data-tags="งบการเงิน DBD นำส่งงบ สบช3 XBRL">
           <h3>ยื่นงบการเงินกับ DBD ให้ผ่านในครั้งเดียว</h3>
           <div class="meta">หมวด: งบการเงิน</div>
           <p>เช็กเอกสารก่อนยื่น, จุดพลาดที่พบบ่อย, การแปลงไฟล์ XBRL พร้อมตัวอย่างรายการตรวจสอบ.</p>
           <div class="tags"><span>DBD</span><span>XBRL</span></div>
         </article>
-
-        <!-- IT1: AI สำหรับบัญชี -->
         <article class="article-card" data-category="it" data-tags="AI บัญชี OCR RPA automation เอกสาร ใบกำกับ">
           <h3>AI สำหรับบัญชี: อ่านใบแจ้งหนี้/ใบกำกับ ด้วย OCR + Workflow</h3>
           <div class="meta">หมวด: ความรู้ไอที/AI</div>
           <p>วางโฟลว์รับเอกสาร → OCR → ตรวจสอบ → ลงบัญชี → แนบหลักฐาน ลดงานมือซ้ำซ้อนและความผิดพลาด.</p>
           <div class="tags"><span>OCR</span><span>Automation</span></div>
         </article>
-
-        <!-- IT2: Prompt สำหรับงานบัญชี -->
         <article class="article-card" data-category="it" data-tags="Prompt Engineering AI บัญชี ภาษี แนวปฏิบัติ">
           <h3>Prompt ให้ได้ใจความ: สูตรเขียนคำสั่ง AI ที่นักบัญชีใช้ได้จริง</h3>
           <div class="meta">หมวด: ความรู้ไอที/AI</div>
           <p>แม่แบบ Prompt สำหรับสรุปรายงาน, ตรวจเช็กรายการผิดปกติ, และสร้างเช็กลิสต์งานประจำเดือน.</p>
           <div class="tags"><span>Prompt</span><span>Template</span></div>
         </article>
-
-        <!-- IT3: Dashboard + AI -->
-        <article class="article-card" data-category="it" data-tags="Dashboard Google Sheets Data Studio Looker Studio AI สรุปข้อมูล">
+        <article class="article-card" data-category="it" data-tags="Dashboard Google Sheets Looker Studio AI สรุปข้อมูล">
           <h3>ทำ Dashboard ง่าย ๆ ด้วย Sheets + AI</h3>
           <div class="meta">หมวด: ความรู้ไอที/AI</div>
           <p>เชื่อมข้อมูลรายรับ‑รายจ่าย, ทำพรีเซ็ตกราฟ, และใช้งาน AI ช่วยสรุปอินไซต์อย่างเข้าใจง่าย.</p>
           <div class="tags"><span>Dashboard</span><span>Sheets</span></div>
         </article>
-
-        <!-- IT4: ความปลอดภัยข้อมูล -->
-        <article class="article-card" data-category="it" data-tags="Security ความปลอดภัย ข้อมูล ลูกค้า PDPA การเปิดเผยน้อยที่สุด">
+        <article class="article-card" data-category="it" data-tags="Security ความปลอดภัย ข้อมูล ลูกค้า PDPA">
           <h3>PDPA & ความปลอดภัยข้อมูล เมื่อใช้ AI ในงานบัญชี</h3>
           <div class="meta">หมวด: ความรู้ไอที/AI</div>
           <p>หลักการเก็บ/ใช้ข้อมูลอย่างจำเป็นเท่านั้น, การลบข้อมูลอ่อนไหว, และการเลือกเครื่องมือที่เชื่อถือได้.</p>
           <div class="tags"><span>PDPA</span><span>Privacy</span></div>
         </article>
-
-        <!-- IT5: เวิร์กโฟลว์อัตโนมัติ -->
         <article class="article-card" data-category="it" data-tags="Automation Workflow Make Zapier API เชื่อมระบบ">
           <h3>เชื่อมระบบอัตโนมัติ (Make/Zapier): น้อยคลิกมากผลลัพธ์</h3>
           <div class="meta">หมวด: ความรู้ไอที/AI</div>
@@ -298,11 +304,19 @@
             <li>LINE ID: <a href="https://line.me/R/ti/p/@951lljea" target="_blank" rel="noopener">@951lljea</a></li>
             <li>Email: <a href="mailto:somsak.jear@gmail.com">somsak.jear@gmail.com</a></li>
           </ul>
-          <picture>
-            <!-- ตัวอย่างภาพพื้นหลัง/แบนเนอร์ -->
-            <source srcset="assets/hero@2x.webp" type="image/webp">
-            <img src="assets/hero@2x.jpg" alt="แบนเนอร์บริการบัญชีและภาษี" style="width:100%; border-radius:14px; border:1px solid #1b2340" loading="lazy">
-          </picture>
+          <a href="mailto:somsak.jear@gmail.com" aria-label="ส่งเมลหาเรา" class="clickable-block">
+            <svg viewBox="0 0 720 220" class="svg-fluid" role="img" aria-label="แบนเนอร์ติดต่อโทนสว่าง" style="border-radius:14px; border:1px solid var(--line); box-shadow:var(--shadow)">
+              <defs><linearGradient id="b1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+              <rect x="0" y="0" width="720" height="220" fill="#ffffff"/><rect x="0" y="0" width="720" height="220" fill="#3b82f60d"/>
+              <circle cx="640" cy="60" r="18" fill="#8b5cf6"/><circle cx="600" cy="40" r="10" fill="#3b82f6"/>
+              <g transform="translate(30,40)" fill="#0f172a">
+                <text x="0" y="0" font-size="24" font-weight="700">ACCOUNTANT AI</text>
+                <text x="0" y="34" font-size="18" opacity=".8">บริการบัญชี & ภาษี มืออาชีพ // ให้ความรู้ไอที</text>
+                <g transform="translate(0,70)"><rect x="0" y="-30" width="360" height="80" rx="16" fill="#f3f7ff" stroke="#dbe5ff"/><text x="18" y="10" font-size="18" fill="#0f172a">ติดต่อเร็วสุด: somsak.jear@gmail.com</text></g>
+              </g>
+              <path d="M0,180 Q160,150 320,175 T720,170 V220 H0 Z" fill="url(#b1)"/>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -325,58 +339,54 @@
     const q = document.getElementById('q');
     const articles = Array.from(document.querySelectorAll('.article-card'));
     const counter = document.getElementById('resultCount');
-
     function normalize(s){ return (s||"").toString().toLowerCase().normalize('NFKD'); }
-
-    function highlight(text, term){
-      if(!term) return text;
-      const esc = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      return text.replace(new RegExp(`(${esc})`, 'ig'), '<mark>$1</mark>');
-    }
-
-    function filter(){
-      const term = normalize(q.value.trim());
-      let shown = 0;
-      articles.forEach(a=>{
-        const hay = normalize(a.innerText + ' ' + (a.dataset.tags||'') + ' ' + (a.dataset.category||''));
-        const match = term==='' || hay.includes(term);
-        a.style.display = match ? '' : 'none';
-        if(match){ shown++; if(term){
-          const h3 = a.querySelector('h3');
-          h3.innerHTML = highlight(h3.textContent, term);
-        }}
-      });
-      counter.textContent = term? `ผลลัพธ์ ${shown} บทความ` : `บทความทั้งหมด`;
-    }
-    q.addEventListener('input', filter);
+    function highlight(text, term){ if(!term) return text; const esc = term.replace(/[.*+?^${}()|[\]\]/g, '\$&'); return text.replace(new RegExp(`(${esc})`, 'ig'), '<mark>$1</mark>'); }
+    function filter(){ const term = normalize(q.value.trim()); let shown = 0; articles.forEach(a=>{ const hay = normalize(a.innerText + ' ' + (a.dataset.tags||'') + ' ' + (a.dataset.category||'')); const match = term==='' || hay.includes(term); a.style.display = match ? '' : 'none'; if(match){ shown++; if(term){ const h3 = a.querySelector('h3'); h3.innerHTML = highlight(h3.textContent, term); } } }); counter.textContent = term? `ผลลัพธ์ ${shown} บทความ` : `บทความทั้งหมด`; }
+    q?.addEventListener('input', filter);
 
     // ====== CONTACT FORM ======
     const form = document.getElementById('contactForm');
     form?.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      STATUS.textContent = '';
-      if(!FORM_ENDPOINT){
-        STATUS.innerHTML = '⚠️ กรุณาตั้งค่า FORM_ENDPOINT ก่อนใช้งานจริง';
-        STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--warn');
-        return;
-      }
-      const data = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim(),
-        message: form.message.value.trim(),
-        time: new Date().toISOString()
-      };
-      try{
-        const res = await fetch(FORM_ENDPOINT, { method:'POST', mode:'cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
-        if(!res.ok) throw new Error('bad status '+res.status);
-        form.reset();
-        STATUS.textContent = '✅ ส่งข้อความเรียบร้อย ขอบคุณครับ';
-        STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--ok');
-      }catch(err){
-        STATUS.textContent = '❌ ส่งไม่สำเร็จ โปรดลองอีกครั้งหรือติดต่อทาง LINE';
-        STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger');
-      }
+      e.preventDefault(); STATUS.textContent = '';
+      if(!FORM_ENDPOINT){ STATUS.innerHTML = '⚠️ กรุณาตั้งค่า FORM_ENDPOINT ก่อนใช้งานจริง'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--warn'); return; }
+      const data = { name: form.name.value.trim(), email: form.email.value.trim(), phone: form.phone.value.trim(), message: form.message.value.trim(), time: new Date().toISOString() };
+      try{ const res = await fetch(FORM_ENDPOINT, { method:'POST', mode:'cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) }); if(!res.ok) throw new Error('bad status '+res.status); form.reset(); STATUS.textContent = '✅ ส่งข้อความเรียบร้อย ขอบคุณครับ'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--ok'); }catch(err){ STATUS.textContent = '❌ ส่งไม่สำเร็จ โปรดลองอีกครั้งหรือติดต่อทาง LINE'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger'); }
+    });
+
+    // ====== POSTER: สร้างภาพข้อมูลภงด.51 (SVG) ======
+    (function buildTaxPoster(){
+      const data = { fiscalYear: 2568, halfEnd: '30 มิ.ย. 2568', duePaper: '31 ส.ค. 2568', dueEfilingExtra: '+8 วัน เมื่อยื่นออนไลน์', notes: [ 'ยื่นภายใน 2 เดือนนับแต่วันสิ้นสุดครึ่งปีแรก', 'ประมาณการกำไรสุทธิ ถ้าต่ำกว่า 25% โดยไม่มีเหตุอันสมควร อาจมีเงินเพิ่ม 20%' ] };
+      const svg = `
+        <svg id="svgPoster51" viewBox="0 0 820 240" class="svg-fluid" aria-label="โปสเตอร์ข้อมูล ภ.ง.ด.51" style="border-radius:16px; border:1px solid var(--line); box-shadow: var(--shadow)">
+          <defs><linearGradient id="p1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+          <rect x="0" y="0" width="820" height="240" fill="#ffffff"/>
+          <text x="24" y="48" fill="#0f172a" font-size="28" font-weight="800">ภ.ง.ด.51 ปี ${data.fiscalYear}</text>
+          <g fill="#111827" font-size="16"><text x="24" y="86">สิ้นสุดครึ่งปีแรก: ${data.halfEnd}</text><text x="24" y="112">กำหนดยื่น (กระดาษ): ${data.duePaper}</text><text x="24" y="138">ยื่นออนไลน์: ${data.dueEfilingExtra}</text></g>
+          <g transform="translate(24,162)" font-size="15" fill="#1f2937"><text x="0" y="0">• ${data.notes[0]}</text><text x="0" y="26">• ${data.notes[1]}</text></g>
+          <path d="M0,190 Q200,160 400,185 T820,180 V240 H0 Z" fill="url(#p1)"/>
+        </svg>`;
+      const el = document.getElementById('poster51'); if(el) el.innerHTML = svg;
+    })();
+
+    // ====== A: ดาวน์โหลดโปสเตอร์ (PNG) ======
+    async function svgToPngBlob(svgEl, scale=3){
+      const vb = svgEl.viewBox.baseVal; const w = (vb && vb.width? vb.width: svgEl.clientWidth) * scale; const h = (vb && vb.height? vb.height: svgEl.clientHeight) * scale;
+      const s = new XMLSerializer().serializeToString(svgEl);
+      const blob = new Blob([s], {type:'image/svg+xml;charset=utf-8'});
+      const url = URL.createObjectURL(blob); const img = new Image();
+      return await new Promise((resolve, reject)=>{ img.onload = ()=>{ const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h; const ctx = canvas.getContext('2d'); ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h); ctx.drawImage(img,0,0,w,h); URL.revokeObjectURL(url); canvas.toBlob(b=>resolve(b),'image/png'); }; img.onerror = reject; img.src = url; });
+    }
+    document.getElementById('dlPoster')?.addEventListener('click', async ()=>{
+      const svg = document.getElementById('svgPoster51'); if(!svg) return;
+      const png = await svgToPngBlob(svg, 3);
+      const a = document.createElement('a'); a.href = URL.createObjectURL(png); a.download = 'poster-pnd51-2568.png'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+    });
+
+    // ====== B: พิมพ์/บันทึกเป็น PDF (ผ่าน Print to PDF) ======
+    document.getElementById('pdfPoster')?.addEventListener('click', ()=>{
+      const svg = document.getElementById('svgPoster51'); if(!svg) return;
+      const html = `<!doctype html><html><head><meta charset=\"utf-8\"><title>ภ.ง.ด.51</title><style>@page{size:A4;margin:15mm} body{margin:0;background:#fff;font-family:'Noto Sans Thai',sans-serif} .wrap{display:flex;align-items:center;justify-content:center;height:100vh} svg{max-width:180mm;width:100%;height:auto;display:block}</style></head><body><div class=\"wrap\">${svg.outerHTML}</div><script>window.onload=()=>window.print()<\/script></body></html>`;
+      const blob = new Blob([html], {type:'text/html'}); const url = URL.createObjectURL(blob); window.open(url);
     });
 
     // ====== MISC ======
