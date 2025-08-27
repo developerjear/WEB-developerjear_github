@@ -340,8 +340,9 @@
       await fetch(url, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body, mode:'no-cors' });
       return { ok: true, note: 'no-cors' };
     }
-    const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSsZE-tc8S2zlrepe1e3mW-GjNQdpJ-qn7AtLas5UdL5dT3rsNpqgRbt57SMg5M6uo/exec"; // <-- วาง URL Web App (ลงท้าย /exec) ของ Apps Script ที่ Deploy แล้ว
-const POSTER_PDF_URL = "assets/docs/TAX51.pdf"; // ใส่ลิงก์ไฟล์ PDF ถ้ามี (ปล่อยว่างให้ระบบสร้าง PDF เอง)
+    const POSTER_PDF_URL = "assets/docs/TAX51.pdf";
+const POSTER_IMAGE_URL = "assets/img/TAX51.jpg";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSzSE-tc8S2zIreple1e3mW-GjNQdpJ-qn7AtLas5UdL5dT3rsNpggRbt57SMg5M6uo/exec"; // <-- วาง URL Web App (ลงท้าย /exec) ของ Apps Script ที่ Deploy แล้ว
     const STATUS = document.getElementById('status');
 
     /* ====== SEARCH ====== */
@@ -433,32 +434,67 @@ const POSTER_PDF_URL = "assets/docs/TAX51.pdf"; // ใส่ลิงก์ไ�
       const url = URL.createObjectURL(blob); const img = new Image();
       return await new Promise((resolve, reject)=>{ img.onload = ()=>{ const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h; const ctx = canvas.getContext('2d'); ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h); ctx.drawImage(img,0,0,w,h); URL.revokeObjectURL(url); canvas.toBlob(b=>resolve(b),'image/png'); }; img.onerror = reject; img.src = url; });
     }
-    document.getElementById('dlPoster')?.addEventListener('click', async ()=>{
-      const svg = document.getElementById('svgPoster51'); if(!svg) return;
-      const png = await svgToPngBlob(svg, 3);
-      const a = document.createElement('a'); a.href = URL.createObjectURL(png); a.download = 'poster-pnd51-2568.png'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
-    });
-    document.getElementById('pdfPoster')?.addEventListener('click', ()=>{
-      if (POSTER_PDF_URL) {
+    
+document.getElementById('dlPoster')?.addEventListener('click', async ()=>{
+  try{
+    if (typeof POSTER_IMAGE_URL !== 'undefined' && POSTER_IMAGE_URL) {
+      const lower = POSTER_IMAGE_URL.toLowerCase();
+      const isSvg = lower.endsWith('.svg') || lower.endsWith('.svgz');
+      if (!isSvg) {
         const a = document.createElement('a');
-        a.href = POSTER_PDF_URL;
-        a.target = '_blank';
-        a.download = POSTER_PDF_URL.split('/').pop() || 'poster-pnd51-2568.pdf';
+        a.href = POSTER_IMAGE_URL; a.target = '_blank';
+        a.download = POSTER_IMAGE_URL.split('/').pop() || 'poster';
         a.click();
         return;
       }
-      const svg = document.getElementById('svgPoster51'); if(!svg) return;
-      const html = `<!doctype html><html><head><meta charset="utf-8"><title>ภ.ง.ด.51</title><style>@page{size:A4;margin:15mm} body{margin:0;background:#fff;font-family:'Noto Sans Thai',sans-serif} .wrap{display:flex;align-items:center;justify-content:center;height:100vh} svg{max-width:180mm;width:100%;height:auto;display:block}</style></head><body><div class="wrap">${svg.outerHTML}</div><script>window.onload=()=>window.print()<\/script></body></html>`;
-      const blob = new Blob([html], {type:'text/html'}); const url = URL.createObjectURL(blob); window.open(url);
-    });
+      // แปลง SVG ภายนอก -> PNG
+      const svgText = await fetch(POSTER_IMAGE_URL, {cache:'no-store'}).then(r=>r.text());
+      const svgBlob = new Blob([svgText], {type:'image/svg+xml'});
+      const url = URL.createObjectURL(svgBlob);
+      const img = new Image(); img.crossOrigin = 'anonymous';
+      await new Promise(res=>{ img.onload = res; img.src = url; });
+      const w = img.naturalWidth || 1200, h = img.naturalHeight || 675;
+      const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d'); ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h);
+      ctx.drawImage(img,0,0,w,h);
+      const pngUrl = canvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href = pngUrl; a.download = 'poster.png'; a.click();
+      URL.revokeObjectURL(url);
+      return;
+    }
+    // ไม่มีไฟล์ภายนอก → แปลงจาก SVG บนหน้า (id=svgPoster51)
+    const svg = document.getElementById('svgPoster51'); if(!svg) return;
+    const s = new XMLSerializer().serializeToString(svg);
+    const blob = new Blob([s], {type:'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    const img = new Image(); img.crossOrigin = 'anonymous';
+    await new Promise(res=>{ img.onload = res; img.src = url; });
+    const vb = svg.viewBox?.baseVal;
+    const w = vb ? vb.width : (svg.clientWidth || 1200);
+    const h = vb ? vb.height : (svg.clientHeight || 675);
+    const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d'); ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h);
+    ctx.drawImage(img,0,0,w,h);
+    const pngUrl = canvas.toDataURL('image/png');
+    const a = document.createElement('a'); a.href = pngUrl; a.download = 'poster.png'; a.click();
+    URL.revokeObjectURL(url);
+  }catch(err){ console.error('dlPoster error', err); }
+});
+document.getElementById('pdfPoster')?.addEventListener('click', ()=>{
+  if (POSTER_PDF_URL) {
+    const a = document.createElement('a');
+    a.href = POSTER_PDF_URL; a.target = '_blank';
+    a.download = POSTER_PDF_URL.split('/').pop() || 'poster.pdf';
+    a.click();
+    return;
+  }
+  const svg = document.getElementById('svgPoster51'); if(!svg) return;
+  const html = `<!doctype html><html><head><meta charset="utf-8"><title>ภ.ง.ด.51</title><style>@page{size:A4;margin:15mm} body{margin:0;background:#fff;font-family:'Noto Sans Thai',sans-serif} .wrap{display:flex;align-items:center;justify-content:center;height:100vh} svg{max-width:180mm;width:100%;height:auto;display:block}</style></head><body><div class="wrap">${svg.outerHTML}</div><script>window.onload=()=>window.print()<\/script></body></html>`;
+  const blob = new Blob([html], {type:'text/html'}); const url = URL.createObjectURL(blob); window.open(url);
+});
 
     /* ====== MISC ====== */
-    /* เปลี่ยนข้อความปุ่ม PDF ถ้าตั้งค่าไฟล์ภายนอก */
-    (function(){ const btn = document.getElementById('pdfPoster'); if(btn && POSTER_PDF_URL){ btn.textContent = 'ดาวน์โหลด PDF'; } })();
-
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
-< ! - -   t r i g g e r   p a g e s   - - >  
- 
