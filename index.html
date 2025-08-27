@@ -341,6 +341,7 @@
       return { ok: true, note: 'no-cors' };
     }
     const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSsZE-tc8S2zlrepe1e3mW-GjNQdpJ-qn7AtLas5UdL5dT3rsNpqgRbt57SMg5M6uo/exec"; // <-- วาง URL Web App (ลงท้าย /exec) ของ Apps Script ที่ Deploy แล้ว
+const POSTER_PDF_URL = ""; // ใส่ลิงก์ไฟล์ PDF ถ้ามี (ปล่อยว่างให้ระบบสร้าง PDF เอง)
     const STATUS = document.getElementById('status');
 
     /* ====== SEARCH ====== */
@@ -438,12 +439,23 @@
       const a = document.createElement('a'); a.href = URL.createObjectURL(png); a.download = 'poster-pnd51-2568.png'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
     });
     document.getElementById('pdfPoster')?.addEventListener('click', ()=>{
+      if (POSTER_PDF_URL) {
+        const a = document.createElement('a');
+        a.href = POSTER_PDF_URL;
+        a.target = '_blank';
+        a.download = POSTER_PDF_URL.split('/').pop() || 'poster-pnd51-2568.pdf';
+        a.click();
+        return;
+      }
       const svg = document.getElementById('svgPoster51'); if(!svg) return;
       const html = `<!doctype html><html><head><meta charset="utf-8"><title>ภ.ง.ด.51</title><style>@page{size:A4;margin:15mm} body{margin:0;background:#fff;font-family:'Noto Sans Thai',sans-serif} .wrap{display:flex;align-items:center;justify-content:center;height:100vh} svg{max-width:180mm;width:100%;height:auto;display:block}</style></head><body><div class="wrap">${svg.outerHTML}</div><script>window.onload=()=>window.print()<\/script></body></html>`;
       const blob = new Blob([html], {type:'text/html'}); const url = URL.createObjectURL(blob); window.open(url);
     });
 
     /* ====== MISC ====== */
+    /* เปลี่ยนข้อความปุ่ม PDF ถ้าตั้งค่าไฟล์ภายนอก */
+    (function(){ const btn = document.getElementById('pdfPoster'); if(btn && POSTER_PDF_URL){ btn.textContent = 'ดาวน์โหลด PDF'; } })();
+
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
