@@ -332,7 +332,17 @@
 
   <script>
     // ====== CONFIG ======
-    const FORM_ENDPOINT = ""; // ใส่ URL Web App ของ Google Apps Script ที่ Deploy แล้ว (แบบ Anyone)
+async function postJSON(url, data){
+  const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+  const text = await res.text();
+  try { return JSON.parse(text); } catch { return { ok: res.ok }; }
+}
+async function postFormNoCors(url, data){
+  const body = new URLSearchParams(data).toString();
+  await fetch(url, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body, mode:'no-cors' });
+  return { ok: true, note: 'no-cors' };
+}
+    const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSsZE-tc8S2zlrepe1e3mW-GjNQdpJ-qn7AtLas5UdL5dT3rsNpqgRbt57SMg5M6uo/exec"; // ใส่ URL Web App ของ Google Apps Script ที่ Deploy แล้ว (แบบ Anyone)
     const STATUS = document.getElementById('status');
 
     // ====== SEARCH ======
@@ -340,17 +350,36 @@
     const articles = Array.from(document.querySelectorAll('.article-card'));
     const counter = document.getElementById('resultCount');
     function normalize(s){ return (s||"").toString().toLowerCase().normalize('NFKD'); }
-    function highlight(text, term){ if(!term) return text; const esc = term.replace(/[.*+?^${}()|[\]\]/g, '\$&'); return text.replace(new RegExp(`(${esc})`, 'ig'), '<mark>$1</mark>'); }
+    function highlight(text, term){
+  if(!term) return text;
+  const esc = term.replace(/[.*+?^${}()|[\]\]/g, '\$&');
+  return text.replace(new RegExp(`(${esc})`, 'ig'), '<mark>$1</mark>');
+}
+()|[\]\]/g, '\$&'); return text.replace(new RegExp(`(${esc})`, 'ig'), '<mark>$1</mark>'); }
     function filter(){ const term = normalize(q.value.trim()); let shown = 0; articles.forEach(a=>{ const hay = normalize(a.innerText + ' ' + (a.dataset.tags||'') + ' ' + (a.dataset.category||'')); const match = term==='' || hay.includes(term); a.style.display = match ? '' : 'none'; if(match){ shown++; if(term){ const h3 = a.querySelector('h3'); h3.innerHTML = highlight(h3.textContent, term); } } }); counter.textContent = term? `ผลลัพธ์ ${shown} บทความ` : `บทความทั้งหมด`; }
     q?.addEventListener('input', filter);
 
     // ====== CONTACT FORM ======
     const form = document.getElementById('contactForm');
     form?.addEventListener('submit', async (e)=>{
-      e.preventDefault(); STATUS.textContent = '';
-      if(!FORM_ENDPOINT){ STATUS.innerHTML = '⚠️ กรุณาตั้งค่า FORM_ENDPOINT ก่อนใช้งานจริง'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--warn'); return; }
-      const data = { name: form.name.value.trim(), email: form.email.value.trim(), phone: form.phone.value.trim(), message: form.message.value.trim(), time: new Date().toISOString() };
-      try{ const res = await fetch(FORM_ENDPOINT, { method:'POST', mode:'cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) }); if(!res.ok) throw new Error('bad status '+res.status); form.reset(); STATUS.textContent = '✅ ส่งข้อความเรียบร้อย ขอบคุณครับ'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--ok'); }catch(err){ STATUS.textContent = '❌ ส่งไม่สำเร็จ โปรดลองอีกครั้งหรือติดต่อทาง LINE'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger'); }
+  e.preventDefault(); STATUS.textContent='';
+  if(!FORM_ENDPOINT){ STATUS.innerHTML='⚠️ กรุณาตั้งค่า <code>FORM_ENDPOINT</code> ก่อน'; STATUS.style.color=getComputedStyle(document.documentElement).getPropertyValue('--warn'); return; }
+  const data={
+    name: form.name?.value?.trim()||'',
+    email: form.email?.value?.trim()||'',
+    phone: form.phone?.value?.trim()||'',
+    message: form.message?.value?.trim()||'',
+    time: new Date().toISOString()
+  };
+  const btn=form.querySelector('button[type="submit"]'); const old=btn?btn.textContent:''; if(btn){ btn.disabled=true; btn.textContent='กำลังส่ง...'; }
+  try{
+    let resp;
+    try{ resp = await postJSON(FORM_ENDPOINT, data); if(!resp?.ok) throw new Error('not-ok'); }
+    catch(_){ resp = await postFormNoCors(FORM_ENDPOINT, data); }
+    form.reset(); STATUS.textContent='✅ ส่งข้อความเรียบร้อย ขอบคุณครับ'; STATUS.style.color=getComputedStyle(document.documentElement).getPropertyValue('--ok');
+  }catch(err){ STATUS.textContent='❌ ส่งไม่สำเร็จ โปรดลองอีกครั้งหรือติดต่อทาง LINE'; STATUS.style.color=getComputedStyle(document.documentElement).getPropertyValue('--danger'); }
+  finally{ if(btn){ btn.disabled=false; btn.textContent=old; } }
+}); if(!res.ok) throw new Error('bad status '+res.status); form.reset(); STATUS.textContent = '✅ ส่งข้อความเรียบร้อย ขอบคุณครับ'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--ok'); }catch(err){ STATUS.textContent = '❌ ส่งไม่สำเร็จ โปรดลองอีกครั้งหรือติดต่อทาง LINE'; STATUS.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger'); }
     });
 
     // ====== POSTER: สร้างภาพข้อมูลภงด.51 (SVG) ======

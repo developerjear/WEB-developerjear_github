@@ -9,6 +9,10 @@
   --border: #e5e7eb;
   --radius: 16px;
   --container: 1100px;
+
+  --ok: #166534;
+  --danger: #b91c1c;
+  --warn: #a16207;
 }
 * { box-sizing: border-box; }
 html, body { height: 100%; }
